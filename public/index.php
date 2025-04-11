@@ -1,19 +1,17 @@
 <?php
 
+use App\Router;
+
 require __DIR__ . '/../vendor/autoload.php';
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 
-echo "Hello World! <br/>";
+$router = new Router();
+$router->get('/', fn() => 'Home from router!');
+$router->get('/test', fn() => 'Test from router!');
+$router->post('/', fn() => 'posting data');
 
-$dsn = $_ENV['DB_DRIVER'] . ':dbname=' . $_ENV['DB_DATABASE'] . ';host=' . $_ENV['DB_HOST'];
-$user = $_ENV['DB_USER'];
-$pass = $_ENV['DB_PASS'];
-try {
-    $pdo = new PDO($dsn, $user, $pass);
-} catch (\PDOException $e) {
-    echo 'Failed: ' . $e->getMessage();
-}
-
-var_dump($pdo);
+$requestUri = $_SERVER['REQUEST_URI'];
+$requestMethod = $_SERVER['REQUEST_METHOD'];
+echo $router->resolve($requestUri, $requestMethod);
