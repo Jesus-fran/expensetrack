@@ -2,10 +2,12 @@
 
 namespace App\Controllers;
 
-class HomeController 
+use App\View;
+
+class HomeController
 {
-    public function index(): string
+    public function index(): View
     {
-        return 'Hi from Home controller';
+        return View::make('index.php');
     }
 }
