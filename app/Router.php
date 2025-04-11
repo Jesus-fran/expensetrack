@@ -8,17 +8,17 @@ class Router
 {
     private array $routes = [];
 
-    private function register(string $route, string $method, callable $callback)
+    private function register(string $route, string $method, callable|array $callback)
     {
         $this->routes[$method][$route] = $callback;
     }
 
-    public function get(string $route, callable $callback)
+    public function get(string $route, callable|array $callback)
     {
         $this->register($route, 'get', $callback);
     }
 
-    public function post(string $route, callable $callback)
+    public function post(string $route, callable|array $callback)
     {
         $this->register($route, 'post', $callback);
     }
@@ -36,6 +36,12 @@ class Router
         }
 
         $action = $this->routes[strtolower($requestMethod)][$requestUri];
-        return call_user_func($action);
+        if (is_callable($action)) {
+            return call_user_func($action);
+        }
+
+        [$namespace, $method] = $action;
+        $class = new $namespace;
+        return call_user_func_array([$class, $method], []);
     }
 }

@@ -9,7 +9,7 @@ $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 
 $router = new Router();
-$router->get('/', fn() => 'Home from router!');
+$router->get('/', ['App\Controllers\HomeController', 'index']);
 $router->get('/test', fn() => 'Test from router!');
 $router->post('/', fn() => 'posting data');
 
