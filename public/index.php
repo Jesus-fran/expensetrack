@@ -12,6 +12,7 @@ $dotenv->load();
 
 $router = new Router();
 $router->get('/', ['App\Controllers\HomeController', 'index']);
+$router->get('/create', ['App\Controllers\HomeController', 'create']);
 $router->get('/test', fn() => 'Test from router!');
 $router->post('/', fn() => 'posting data');
 

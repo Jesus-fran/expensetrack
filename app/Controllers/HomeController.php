@@ -10,4 +10,9 @@ class HomeController
     {
         return View::make('index.php');
     }
+
+    public function create(): View
+    {
+        return View::make('create.php');
+    }
 }
