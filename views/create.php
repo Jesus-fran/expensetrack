@@ -9,7 +9,7 @@
 
 <body>
     <h3>Upload file transaction</h3>
-    <form action="/upload" method="post">
+    <form action="/upload" method="post" enctype="multipart/form-data">
         <input type="file" name="transaction" id="transaction">
         <input type="submit" value="Upload">
     </form>
