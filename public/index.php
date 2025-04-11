@@ -1,5 +1,6 @@
 <?php
 
+use App\App;
 use App\Router;
 
 require __DIR__ . '/../vendor/autoload.php';
@@ -12,6 +13,5 @@ $router->get('/', fn() => 'Home from router!');
 $router->get('/test', fn() => 'Test from router!');
 $router->post('/', fn() => 'posting data');
 
-$requestUri = $_SERVER['REQUEST_URI'];
-$requestMethod = $_SERVER['REQUEST_METHOD'];
-echo $router->resolve($requestUri, $requestMethod);
+
+(new App($router, [$_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']]))->run();
