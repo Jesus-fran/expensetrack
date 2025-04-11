@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\TransactionModel;
 use App\Transaction;
 use App\View;
 
@@ -21,9 +22,11 @@ class HomeController
     {
         $transaction = Transaction::extractFromFile($_FILES['transaction']);
 
-        echo "<pre>";
-        print_r($transaction);
-        echo "</pre>";
+        $transactionModel = new TransactionModel();
+        $dataTransaction = $transactionModel->createMany($transaction);
 
+        echo "<pre>";
+        print_r($dataTransaction);
+        echo "</pre>";
     }
 }
