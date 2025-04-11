@@ -23,10 +23,8 @@ class HomeController
         $transaction = Transaction::extractFromFile($_FILES['transaction']);
 
         $transactionModel = new TransactionModel();
-        $dataTransaction = $transactionModel->createMany($transaction);
+        $transactionModel->createMany($transaction);
 
-        echo "<pre>";
-        print_r($dataTransaction);
-        echo "</pre>";
+       header('Location: /');
     }
 }

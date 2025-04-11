@@ -10,6 +10,8 @@ class TransactionModel extends Model
     {
         $query = $this->db->prepare('INSERT INTO transactions (description, check_num, amount, created_at) VALUE(:description,:check_num,:amount,:created_at)');
 
-        return $insert = $query->execute($transaction[0]);
+        foreach ($transaction as $transactionItem) {
+            $query->execute($transactionItem);
+        }
     }
 }

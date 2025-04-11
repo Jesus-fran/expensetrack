@@ -40,7 +40,7 @@ class Transaction
 
         return [
             'created_at' => $created_at,
-            'check_num' => $checkNum,
+            'check_num' => $checkNum ?: NULL,
             'description' => $description,
             'amount' => $amount,
         ];
