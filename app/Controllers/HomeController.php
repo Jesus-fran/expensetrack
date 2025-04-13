@@ -10,7 +10,14 @@ class HomeController
 {
     public function index(): View
     {
-        return View::make('index.php');
+        $transactionsModel = new TransactionModel();
+        $transactions = $transactionsModel->get();
+
+        // $totalIcome = Transaction::calculateIcome($transactions);
+        // $totalExpense = Transaction::calculateExpense($transactions);
+        // $netTotal = Transaction::calculateTotal($transactions);
+
+        return View::make('index.php', ['transactions' => $transactions]);
     }
 
     public function create(): View
@@ -25,6 +32,6 @@ class HomeController
         $transactionModel = new TransactionModel();
         $transactionModel->createMany($transaction);
 
-       header('Location: /');
+        header('Location: /');
     }
 }
