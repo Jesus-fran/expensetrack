@@ -6,6 +6,18 @@ use DateTime;
 
 class Transaction
 {
+
+    public int $id;
+    public string $description;
+    public ?int $check_num;
+    public float $amount;
+    public string|DateTime $created_at;
+
+    public function __construct()
+    {
+        $this->created_at = new DateTime($this->created_at);
+    }
+
     protected static array $transactions = [];
 
     public static function extractFromFile(array $fileUploaded): array

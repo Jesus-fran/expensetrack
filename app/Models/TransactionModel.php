@@ -23,7 +23,7 @@ class TransactionModel extends Model
     {
         $transaction = $this->db->prepare('SELECT * FROM transactions');
         $transaction->execute();
-        return $transaction->fetchAll(\PDO::FETCH_FUNC, ['\App\Models\TransactionModel', 'ApplyFormat']);
+        return $transaction->fetchAll(\PDO::FETCH_CLASS, '\App\Transaction');
     }
 
     public function ApplyFormat($id, $description, $check_num, $amount, $created_at, ): stdClass
