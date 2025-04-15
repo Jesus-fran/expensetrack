@@ -34,7 +34,7 @@
     <?php endif ?>
     <div class="card-form">
         <form action="/upload" method="post" enctype="multipart/form-data">
-            <input type="file" name="transaction" id="transaction">
+            <input type="file" name="transaction[]" id="transaction" multiple>
             <input type="submit" value="Upload" class="submit">
         </form>
     </div>

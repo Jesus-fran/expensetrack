@@ -43,23 +43,24 @@ class Transaction
         static::$netTotal->add($amount);
     }
 
-    public static function extractFromFile(array $fileUploaded): array
+    public static function extractFromFile(array $filesUploaded): array
     {
-        $tmpNameFile = $fileUploaded['tmp_name'];
-        $typeFile = $fileUploaded['type'];
+        foreach ($filesUploaded['tmp_name'] as $key => $tmpNameFile) {
+            $typeFile = $filesUploaded['type'][$key];
 
-        if (!($typeFile === 'text/csv')) {
-            throw new FileInvalidException();
-        }
-
-        $handle = fopen($tmpNameFile, "r");
-        if ($handle) {
-            fgets($handle);
-            while (($line = fgetcsv($handle)) !== false) {
-                array_push(static::$transactions, static::formatTransaction($line));
+            if (!($typeFile === 'text/csv')) {
+                throw new FileInvalidException();
             }
+
+            $handle = fopen($tmpNameFile, "r");
+            if ($handle) {
+                fgets($handle);
+                while (($line = fgetcsv($handle)) !== false) {
+                    array_push(static::$transactions, static::formatTransaction($line));
+                }
+            }
+            fclose($handle);
         }
-        fclose($handle);
 
         return static::$transactions;
     }
