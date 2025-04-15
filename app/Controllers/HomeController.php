@@ -13,21 +13,23 @@ class HomeController
         $transactionsModel = new TransactionModel();
         $transactions = $transactionsModel->get();
 
-        $totalIncome = Transaction::$totalIncome->getFormated();
-        $totalExpense = Transaction::$totalExpense->getFormated();
-        $netTotal = Transaction::$netTotal->getFormated();
+        if (isset(Transaction::$totalIncome, Transaction::$totalExpense, Transaction::$netTotal)) {
+            $totalIncome = Transaction::$totalIncome->getFormated();
+            $totalExpense = Transaction::$totalExpense->getFormated();
+            $netTotal = Transaction::$netTotal->getFormated();
+        }
 
         return View::make('index.php', [
             'transactions' => $transactions,
-            'totalIncome' => $totalIncome,
-            'totalExpense' => $totalExpense,
-            'netTotal' => $netTotal
-        ]);
+            'totalIncome' => $totalIncome ?? null,
+            'totalExpense' => $totalExpense ?? null,
+            'netTotal' => $netTotal ?? null
+        ], 'layout.php');
     }
 
     public function create(): View
     {
-        return View::make('create.php');
+        return View::make('create.php', [], layoutName: 'layout.php');
     }
 
     public function save()

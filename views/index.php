@@ -1,29 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <style>
-        table {
-            border-collapse: collapse;
-        }
-
-        th,
-        td {
-            padding: 7px;
-        }
-    </style>
-</head>
-
-<body>
-    <h3>Home!</h3>
-
-    <div style="display:flex">
-        <?php if (!empty($transactions)): ?>
+<div style="display:flex">
+    <?php if (!empty($transactions)): ?>
+        <div class="border-table">
             <table border="1">
-                <tr>
+                <tr class="head-table">
                     <th>Date</th>
                     <th>Check #</th>
                     <th>Description</th>
@@ -63,15 +42,14 @@
                         <?= $netTotal ?>
                     </td>
                 </tr>
-            </table>
-        <?php else: ?>
-            <p style="color:red">No transactions..</p>
-        <?php endif ?>
-        <br />
-        <div>
-            <a href="/create">Register new Transaction File. ¡aqui!</a>
-        </div>
-    </div>
-</body>
 
-</html>
+            </table>
+        </div>
+    <?php else: ?>
+        <p style="color:red">No transactions..</p>
+    <?php endif ?>
+    <br />
+    <div>
+
+    </div>
+</div>
