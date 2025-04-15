@@ -13,6 +13,7 @@ class Transaction
     public float $amount;
     public string|DateTime $created_at;
     public bool $income;
+    protected static array $transactions = [];
 
     public function __construct()
     {
@@ -20,7 +21,13 @@ class Transaction
         $this->income = ($this->amount > 0) ? true : false;
     }
 
-    protected static array $transactions = [];
+    public function getFormatedAmount(): string
+    {
+        if ($this->amount > 0) {
+            return '$' . number_format($this->amount, 2);
+        }
+        return str_replace('-', '-$', (string) number_format($this->amount, 2));
+    }
 
     public static function extractFromFile(array $fileUploaded): array
     {

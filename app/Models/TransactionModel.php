@@ -37,17 +37,6 @@ class TransactionModel extends Model
         ];
     }
 
-    public function formatMoney(float $amount): array
-    {
-        if ($amount > 0) {
-            return ['amount' => '$' . number_format($amount, 2), 'income' => ($amount > 0) ? true : false];
-        }
-        return [
-            'amount' => str_replace('-', '-$', (string) number_format($amount, 2)),
-            'income' => ($amount > 0) ? true : false
-        ];
-    }
-
     public function formatCreatedAt(string $created_at): string
     {
         $dateTime = new DateTime($created_at);
