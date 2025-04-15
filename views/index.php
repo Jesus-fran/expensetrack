@@ -10,7 +10,7 @@
                 </tr>
                 <?php foreach ($transactions as $transaction): ?>
                     <tr>
-                        <td><?= $transaction->created_at->format('M d, Y') ?></td>
+                        <td><?= $transaction->created_at->format('M j, Y') ?></td>
                         <td><?= $transaction->check_num ?></td>
                         <td><?= $transaction->description ?></td>
                         <td style='color:<?= $transaction->income ? 'green' : 'red' ?>'>
