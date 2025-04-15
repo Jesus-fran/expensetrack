@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App;
 
+use App\Exceptions\NotFoundException;
+
 class View
 {
     protected string $viewPath;
@@ -23,7 +25,7 @@ class View
         $viewPath = PATH_VIEW . $viewName;
         $layoutPath = PATH_VIEW . $layoutName;
         if (!file_exists($viewPath) || !file_exists(filename: $layoutPath)) {
-            throw new \Exception('Not found page 404');
+            throw new NotFoundException();
         }
 
         return new static($viewPath, $params, $layoutPath);

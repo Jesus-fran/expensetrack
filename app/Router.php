@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App;
 
+use App\Exceptions\NotFoundException;
+
 class Router
 {
     private array $routes = [];
@@ -32,7 +34,7 @@ class Router
         }
 
         if (!isset($this->routes[strtolower($requestMethod)][$requestUri])) {
-            throw new \Exception('This Page Not Found');
+            throw new NotFoundException();
         }
 
         $action = $this->routes[strtolower($requestMethod)][$requestUri];

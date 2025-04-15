@@ -12,7 +12,7 @@
 
         .title {
             text-decoration: none;
-            color:black;
+            color: black;
         }
 
         * {
@@ -68,10 +68,8 @@
     </header>
 
 
-    <div style="display:flex">
-
+    <div>
         <?= $content ?>
-
     </div>
 
     <footer>
