@@ -13,13 +13,16 @@ class HomeController
         $transactionsModel = new TransactionModel();
         $transactions = $transactionsModel->get();
 
-        $totalIcome = Transaction::$totalIncome;
-        $totalExpense = Transaction::$totalExpense;
-        $netTotal = Transaction::$netTotal;
+        $totalIcome = Transaction::$totalIncome->getFormated();
+        $totalExpense = Transaction::$totalExpense->getFormated();
+        $netTotal = Transaction::$netTotal->getFormated();
 
-        var_dump($totalIcome, $totalExpense, $netTotal);
-
-        return View::make('index.php', ['transactions' => $transactions]);
+        return View::make('index.php', [
+            'transactions' => $transactions,
+            'totalIcome' => $totalIcome,
+            'totalExpense' => $totalExpense,
+            'netTotal' => $netTotal
+        ]);
     }
 
     public function create(): View

@@ -6,39 +6,40 @@ use DateTime;
 
 class Transaction
 {
-
     public int $id;
     public string $description;
     public ?int $check_num;
-    public float $amount;
+    public float|Money $amount;
     public string|DateTime $created_at;
     public bool $income;
     protected static array $transactions = [];
-
-    public static float $totalIncome = 0;
-    public static float $totalExpense = 0;
-    public static float $netTotal = 0;
+    public static Money $totalIncome;
+    public static Money $totalExpense;
+    public static Money $netTotal;
 
     public function __construct()
     {
+        $this->amount = new Money($this->amount);
         $this->created_at = new DateTime($this->created_at);
-        $this->income = ($this->amount > 0) ? true : false;
+        $amount = $this->amount->value;
+        $this->income = ($amount > 0) ? true : false;
 
-        if ($this->amount > 0) {
-            static::$totalIncome += $this->amount;
+        if (!isset(static::$totalIncome)) {
+            static::$totalIncome = new Money();
+        }
+        if (!isset(static::$totalExpense)) {
+            static::$totalExpense = new Money();
+        }
+        if (!isset(static::$netTotal)) {
+            static::$netTotal = new Money();
+        }
+
+        if ($amount > 0) {
+            static::$totalIncome->add($amount);
         } else {
-            static::$totalExpense += $this->amount;
-
+            static::$totalExpense->add($amount);
         }
-        static::$netTotal += $this->amount;
-    }
-
-    public function getFormatedAmount(): string
-    {
-        if ($this->amount > 0) {
-            return '$' . number_format($this->amount, 2);
-        }
-        return str_replace('-', '-$', (string) number_format($this->amount, 2));
+        static::$netTotal->add($amount);
     }
 
     public static function extractFromFile(array $fileUploaded): array

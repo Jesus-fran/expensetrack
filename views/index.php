@@ -35,7 +35,7 @@
                         <td><?= $transaction->check_num ?></td>
                         <td><?= $transaction->description ?></td>
                         <td style='color:<?= $transaction->income ? 'green' : 'red' ?>'>
-                            <?= $transaction->getFormatedAmount() ?>
+                            <?= $transaction->amount->getFormated() ?>
                         </td>
                     </tr>
                 <?php endforeach ?>
