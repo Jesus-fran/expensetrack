@@ -39,6 +39,30 @@
                         </td>
                     </tr>
                 <?php endforeach ?>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td><strong>Total Income: </strong></td>
+                    <td>
+                        <?= $totalIncome ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td><strong>Total Expense: </strong></td>
+                    <td>
+                        <?= $totalExpense ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td><strong>Net Total: </strong></td>
+                    <td>
+                        <?= $netTotal ?>
+                    </td>
+                </tr>
             </table>
         <?php else: ?>
             <p style="color:red">No transactions..</p>

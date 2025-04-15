@@ -13,13 +13,13 @@ class HomeController
         $transactionsModel = new TransactionModel();
         $transactions = $transactionsModel->get();
 
-        $totalIcome = Transaction::$totalIncome->getFormated();
+        $totalIncome = Transaction::$totalIncome->getFormated();
         $totalExpense = Transaction::$totalExpense->getFormated();
         $netTotal = Transaction::$netTotal->getFormated();
 
         return View::make('index.php', [
             'transactions' => $transactions,
-            'totalIcome' => $totalIcome,
+            'totalIncome' => $totalIncome,
             'totalExpense' => $totalExpense,
             'netTotal' => $netTotal
         ]);
