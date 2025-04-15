@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Exceptions\FileInvalidException;
 use App\Models\TransactionModel;
 use App\Transaction;
 use App\View;
@@ -34,10 +35,14 @@ class HomeController
 
     public function save()
     {
-        $transaction = Transaction::extractFromFile($_FILES['transaction']);
+        try {
+            $transaction = Transaction::extractFromFile($_FILES['transaction']);
+        } catch (FileInvalidException $e) {
+            header('Location: /create?error='.$e->getMessage());
+        }
 
         $transactionModel = new TransactionModel();
-        $transactionModel->createMany($transaction);
+        $transactionModel->createMany($transaction ?? null);
 
         header('Location: /');
     }

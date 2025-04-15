@@ -29,6 +29,9 @@
 
 <div style="height: 70vh;display:flex;align-items:center;justify-content:space-around;flex-direction:column;">
     <h3>Upload file transaction</h3>
+    <?php if (isset(($_GET['error']))): ?>
+        <p style="color:red;"><?= $_GET['error'] ?></p>
+    <?php endif ?>
     <div class="card-form">
         <form action="/upload" method="post" enctype="multipart/form-data">
             <input type="file" name="transaction" id="transaction">

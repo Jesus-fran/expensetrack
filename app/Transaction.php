@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Exceptions\FileInvalidException;
 use DateTime;
 
 class Transaction
@@ -48,7 +49,7 @@ class Transaction
         $typeFile = $fileUploaded['type'];
 
         if (!($typeFile === 'text/csv')) {
-            throw new \Exception('File invalid, not is a csv :c');
+            throw new FileInvalidException();
         }
 
         $handle = fopen($tmpNameFile, "r");
