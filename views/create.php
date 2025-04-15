@@ -1,9 +1,4 @@
 <style>
-    .create-transaction-div {
-        height: 100%;
-        text-align: center;
-    }
-
     .card-form {
         border-radius: 20px;
         padding: 50px;
@@ -32,7 +27,7 @@
     }
 </style>
 
-<div class="create-transaction-div">
+<div style="height: 70vh;display:flex;align-items:center;justify-content:space-around;flex-direction:column;">
     <h3>Upload file transaction</h3>
     <div class="card-form">
         <form action="/upload" method="post" enctype="multipart/form-data">
