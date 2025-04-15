@@ -12,10 +12,12 @@ class Transaction
     public ?int $check_num;
     public float $amount;
     public string|DateTime $created_at;
+    public bool $income;
 
     public function __construct()
     {
         $this->created_at = new DateTime($this->created_at);
+        $this->income = ($this->amount > 0) ? true : false;
     }
 
     protected static array $transactions = [];

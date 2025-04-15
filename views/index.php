@@ -31,11 +31,11 @@
                 </tr>
                 <?php foreach ($transactions as $transaction): ?>
                     <tr>
-                        <td><?= $transaction->created_at ?></td>
+                        <td><?= $transaction->created_at->format('M d, Y') ?></td>
                         <td><?= $transaction->check_num ?></td>
                         <td><?= $transaction->description ?></td>
-                        <td style='color:<?= $transaction->amount['income'] ? 'green' : 'red' ?>'>
-                            <?= $transaction->amount['amount'] ?>
+                        <td style='color:<?= $transaction->income ? 'green' : 'red' ?>'>
+                            <?= $transaction->amount ?>
                         </td>
                     </tr>
                 <?php endforeach ?>

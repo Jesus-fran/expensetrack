@@ -12,10 +12,7 @@ class HomeController
     {
         $transactionsModel = new TransactionModel();
         $transactions = $transactionsModel->get();
-        echo '<pre>';
-        var_dump($transactions);
-        echo '</pre>';
-        exit;
+     
         // $totalIcome = Transaction::calculateIcome($transactions);
         // $totalExpense = Transaction::calculateExpense($transactions);
         // $netTotal = Transaction::calculateTotal($transactions);
