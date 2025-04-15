@@ -13,7 +13,6 @@ class Transaction
     public float|Money $amount;
     public string|DateTime $created_at;
     public bool $income;
-    protected static array $transactions = [];
     public static Money $totalIncome;
     public static Money $totalExpense;
     public static Money $netTotal;
@@ -45,6 +44,9 @@ class Transaction
 
     public static function extractFromFile(array $filesUploaded): array
     {
+
+        $transactions = [];
+
         foreach ($filesUploaded['tmp_name'] as $key => $tmpNameFile) {
             $typeFile = $filesUploaded['type'][$key];
 
@@ -56,13 +58,13 @@ class Transaction
             if ($handle) {
                 fgets($handle);
                 while (($line = fgetcsv($handle)) !== false) {
-                    array_push(static::$transactions, static::formatTransaction($line));
+                    array_push($transactions, static::formatTransaction($line));
                 }
             }
             fclose($handle);
         }
 
-        return static::$transactions;
+        return $transactions;
     }
 
     protected static function formatTransaction(array $transaction): array
