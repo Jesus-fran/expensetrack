@@ -10,6 +10,11 @@
             margin: 0px;
         }
 
+        .title {
+            text-decoration: none;
+            color:black;
+        }
+
         * {
             font-family: Arial, Helvetica, sans-serif;
         }
@@ -38,7 +43,8 @@
             padding: 7px;
         }
 
-        header div, footer div {
+        header div,
+        footer div {
             text-align: center;
             width: auto;
             background-color: gold;
@@ -54,7 +60,9 @@
 <body>
     <header>
         <div>
-            <h2>Expense Tracking</h2>
+            <a href="/" class="title">
+                <h2>Expense Tracking</h2>
+            </a>
             <a href="/create">Register new Transaction File. ¡aqui!</a>
         </div>
     </header>
