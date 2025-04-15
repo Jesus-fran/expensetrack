@@ -12,10 +12,12 @@ class HomeController
     {
         $transactionsModel = new TransactionModel();
         $transactions = $transactionsModel->get();
-     
-        // $totalIcome = Transaction::calculateIcome($transactions);
-        // $totalExpense = Transaction::calculateExpense($transactions);
-        // $netTotal = Transaction::calculateTotal($transactions);
+
+        $totalIcome = Transaction::$totalIncome;
+        $totalExpense = Transaction::$totalExpense;
+        $netTotal = Transaction::$netTotal;
+
+        var_dump($totalIcome, $totalExpense, $netTotal);
 
         return View::make('index.php', ['transactions' => $transactions]);
     }

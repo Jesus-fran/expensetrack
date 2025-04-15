@@ -15,10 +15,22 @@ class Transaction
     public bool $income;
     protected static array $transactions = [];
 
+    public static float $totalIncome = 0;
+    public static float $totalExpense = 0;
+    public static float $netTotal = 0;
+
     public function __construct()
     {
         $this->created_at = new DateTime($this->created_at);
         $this->income = ($this->amount > 0) ? true : false;
+
+        if ($this->amount > 0) {
+            static::$totalIncome += $this->amount;
+        } else {
+            static::$totalExpense += $this->amount;
+
+        }
+        static::$netTotal += $this->amount;
     }
 
     public function getFormatedAmount(): string
