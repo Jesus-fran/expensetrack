@@ -12,11 +12,10 @@ define('PATH_VIEW', __DIR__ . '/../views/');
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 
-$router = new Router();
-$router->get('/', ['App\Controllers\HomeController', 'index']);
-$router->get('/create', ['App\Controllers\HomeController', 'create']);
-$router->post('/upload', ['App\Controllers\HomeController', 'save']);
-$router->get('/404', fn() => View::make('errors/404.php', [], 'layout.php'));
+(new Router())->get('/', ['App\Controllers\HomeController', 'index'])
+    ->get('/create', ['App\Controllers\HomeController', 'create'])
+    ->post('/upload', ['App\Controllers\HomeController', 'save'])
+    ->get('/404', fn() => View::make('errors/404.php', [], 'layout.php'));
 
 try {
     (new App($router, [$_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']]))->run();
