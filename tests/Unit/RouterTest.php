@@ -3,8 +3,9 @@
 declare(strict_types=1);
 use App\Exceptions\NotFoundException;
 use App\Router;
-use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\DataProviderExternal;
 use PHPUnit\Framework\TestCase;
+use Tests\Unit\DataProvider\RouterDataProvider;
 
 final class RouterTest extends TestCase
 {
@@ -38,7 +39,7 @@ final class RouterTest extends TestCase
         $this->assertEmpty((new Router)->routes());
     }
 
-    #[DataProvider('additionProvider')]
+    #[DataProviderExternal(RouterDataProvider::class, 'AdditionProvider')]
     public function test_it_throw_is_executed_in_resolve(string $requestUri, string $requestMethod)
     {
         $user = new class {
@@ -54,16 +55,5 @@ final class RouterTest extends TestCase
 
         $this->expectException(NotFoundException::class);
         $this->router->resolve($requestUri, $requestMethod);
-    }
-
-    public static function AdditionProvider(): array
-    {
-        return [
-            'When route is incorrect' => ['/invoice-asdfasdf', 'get'],
-            'When method is incorrect' => ['/invoice', 'post'],
-            'When method and route is correct but class is not' => ['/invoice', 'get'],
-            'When method of class is incorrect' => ['/user', 'get'],
-            'When callback is incorrect or nullable' => ['/email', 'get'],
-        ];
     }
 }
