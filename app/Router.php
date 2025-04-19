@@ -5,6 +5,10 @@ declare(strict_types=1);
 namespace App;
 
 use App\Exceptions\NotFoundException;
+use App\Services\EmailService;
+use App\Services\InvoiceService;
+use App\Services\PaymentGatewayService;
+use App\Services\SalesTaxService;
 
 class Router
 {
@@ -31,7 +35,7 @@ class Router
         return $this->routes;
     }
 
-    public function resolve(string $requestUri, string $requestMethod): mixed
+    public function resolve(string $requestUri, string $requestMethod, InvoiceService $invoiceService): mixed
     {
         $requestUri = explode('?', $requestUri)[0];
 
@@ -60,7 +64,7 @@ class Router
             throw new NotFoundException();
         }
 
-        $class = new $namespace;
+        $class = new $namespace($invoiceService);
 
         if ($method === null || !method_exists($class, $method)) {
             throw new NotFoundException();
