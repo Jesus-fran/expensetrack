@@ -3,10 +3,6 @@
 use App\App;
 use App\Exceptions\NotFoundException;
 use App\Router;
-use App\Services\EmailService;
-use App\Services\InvoiceService;
-use App\Services\PaymentGatewayService;
-use App\Services\SalesTaxService;
 use App\View;
 
 require __DIR__ . '/../vendor/autoload.php';
@@ -25,12 +21,7 @@ $router = (new Router())->get('/', ['App\Controllers\HomeController', 'index'])
 try {
     (new App(
         $router,
-        [$_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']],
-        new InvoiceService(
-            new SalesTaxService,
-            new PaymentGatewayService,
-            new EmailService
-        )
+        [$_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']]
     ))->run();
 } catch (NotFoundException $e) {
     if ($e->getCode() === 404) {
