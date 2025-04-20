@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-use App\Services\EmailService;
+use App\App;
 use App\Services\InvoiceService;
-use App\Services\PaymentGatewayService;
-use App\Services\SalesTaxService;
 
 class InvoiceController
 {
@@ -16,13 +14,10 @@ class InvoiceController
         $customer = ['name' => 'Dimitry'];
         $amount = 1500;
 
-        $invoiceService = (new InvoiceService(
-            new SalesTaxService,
-            new PaymentGatewayService,
-            new EmailService
-        ))->process($customer, $amount);
+        $invoiceService = App::$container->get(InvoiceService::class);
+        $invoiceProcess = $invoiceService->process($customer, $amount);
 
-        if ($invoiceService) {
+        if ($invoiceProcess) {
             echo "Invoice process sucessfull!";
         }
     }
