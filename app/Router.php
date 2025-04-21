@@ -60,7 +60,7 @@ class Router
             throw new NotFoundException();
         }
 
-        $class = new $namespace;
+        $class = (new Container())->get($namespace);
 
         if ($method === null || !method_exists($class, $method)) {
             throw new NotFoundException();
