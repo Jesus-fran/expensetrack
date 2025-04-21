@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-use App\App;
+use App\Container;
 use App\Services\InvoiceService;
 
 class InvoiceController
@@ -14,7 +14,7 @@ class InvoiceController
         $customer = ['name' => 'Dimitry'];
         $amount = 1500;
 
-        $invoiceService = App::$container->get(InvoiceService::class);
+        $invoiceService = (new Container)->get(InvoiceService::class);
         $invoiceProcess = $invoiceService->process($customer, $amount);
 
         if ($invoiceProcess) {
